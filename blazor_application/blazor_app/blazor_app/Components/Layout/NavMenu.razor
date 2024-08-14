@@ -1,0 +1,38 @@
+﻿@inject NavigationManager NavigationManager
+
+<div class="navbar-container">
+    <div class="navbar-header">
+        <a class="navbar-brand" href="">Inventory</a>
+        <button class="navbar-toggler" @onclick="ToggleNavBar">☰</button>
+    </div>
+
+    <div class="navbar-content @(IsNavBarVisible ? "show" : "hide")">
+        <nav class="nav-menu">
+            <div class="nav-item">
+                <NavLink class="nav-link" href="home" Match="NavLinkMatch.All">
+                    <span class="bi bi-house-door-fill-nav-menu" aria-hidden="true"></span> Home
+                </NavLink>
+            </div>
+            <div class="nav-item">
+                <NavLink class="nav-link" href="/" @onclick="NavigateToHome">
+                    <span class="bi bi-plus-square-fill-nav-menu" aria-hidden="true"></span> Login
+                </NavLink>
+            </div>
+        </nav>
+    </div>
+</div>
+
+@code {
+    private bool IsNavBarVisible { get; set; } = false;
+
+    private void ToggleNavBar()
+    {
+        IsNavBarVisible = !IsNavBarVisible;
+    }
+
+    private void NavigateToHome()
+    {
+        IsNavBarVisible = false;
+        NavigationManager.NavigateTo("/home");
+    }
+}
